@@ -17,6 +17,11 @@ app.use(cors())
 const port = 3002;
 
 
+app.use(express.json());
+app.use(express.urlencoded({
+    extended: true
+}))
+
 app.listen(port,()=>{
     console.log(` 🖥 Servidor corriendo en el puerto ${port}`)
 })
@@ -27,10 +32,10 @@ app.get('/probando',(req,res)=>{
 
     res.status(200).json({
         status:"succcess",
-        message:"ruta de prueba"
+        message:"ruta de prueba",
     })
 })
 
 /*configuración de las rutas para los libros*/
-app.use('/api',bookRouter)
-app.use('/api',userRouter)
+app.use('/api',bookRouter);
+app.use('/api',userRouter);

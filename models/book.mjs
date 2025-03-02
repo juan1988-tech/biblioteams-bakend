@@ -35,10 +35,14 @@ const bookSchema = Schema({
     },
     available:{
         type:Boolean,
+        required: true,
     },
     description:{
         type:String,
     },
 })
 
-export default model("Book",bookSchema,"books");
+
+const Book = model("Book",bookSchema,"books")
+
+export default Book;
