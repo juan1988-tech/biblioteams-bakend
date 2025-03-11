@@ -1,9 +1,11 @@
 import express from 'express';
-import { proofBook, registerBook }  from '../controllers/book.mjs';
+import { proofBook, registerBook, listBook }  from '../controllers/book.mjs';
 const router = express.Router();
 
-router.get('/prueba-libro',proofBook);
-router.post('/registrar-libro',registerBook);
+router.get('/proof-book',proofBook);
+router.post('/register-book',registerBook);
+router.get('/list-book',listBook);
+
 
 export default router;
 

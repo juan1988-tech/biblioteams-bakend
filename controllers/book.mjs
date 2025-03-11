@@ -1,4 +1,5 @@
-import { default as Book } from "../models/book.mjs"
+import { default as Book } from "../models/book.mjs";
+import validateBook from "../helpers/validator.mjs";
 
 const proofBook = (req,res) =>{
     return res.status(200).json({
@@ -22,6 +23,9 @@ const registerBook = (req,res) =>{
         })
     }
 
+    //validación de datos
+    validateBook(params)
+
     const  savedBook = new Book(params);
 
     savedBook.save()
@@ -44,4 +48,24 @@ const registerBook = (req,res) =>{
         })
 }
 
-export { proofBook,registerBook } ;
+const listBook = async (req,res) =>{
+    let cathalog = await Book.find({}).exec()
+    .then((bookList)=>{
+        if(!bookList){
+            return res.status(400).json({
+                status:"failed",
+                message: "na hoy libros"
+            })
+        }
+        return res.status(200).json({
+            status:"success",
+            message: "listado de libros ",
+            list: bookList
+        })
+    })
+    .catch((error)=>{
+        console.log(error)
+    })
+}
+
+export { proofBook,registerBook,listBook } ;

@@ -22,7 +22,7 @@ const bookSchema = Schema({
         required: true,
     },
     dewey_1:{
-        type:Number,
+        type:String,
         required: true,
     },
     topic_2:{
@@ -30,12 +30,11 @@ const bookSchema = Schema({
         required: true,
     },
     dewey_2:{
-        type:Number,
+        type:String,
         required: true,
     },
     available:{
-        type:Boolean,
-        required: true,
+        type:Boolean
     },
     description:{
         type:String,

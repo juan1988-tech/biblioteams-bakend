@@ -27,7 +27,7 @@ app.listen(port,()=>{
 })
 
 /*probar ruta de prueba a la base de datos*/
-app.get('/probando',(req,res)=>{
+app.get('/proof',(req,res)=>{
     console.log('Estoy ejecutando la ruta')
 
     res.status(200).json({
@@ -37,5 +37,8 @@ app.get('/probando',(req,res)=>{
 })
 
 /*configuración de las rutas para los libros*/
-app.use('/api',bookRouter);
-app.use('/api',userRouter);
+app.use('/api/book/',bookRouter);
+app.use('/api/user/',userRouter);
+
+/*ver la funcion de validador*/
+//console.log(validator)
