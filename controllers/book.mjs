@@ -1,7 +1,7 @@
 import { default as Book } from "../models/book.mjs";
 import validateBook from "../helpers/validator.mjs";
 
-const proofBook = (req,res) =>{
+const proofBook = async (req,res) =>{
     return res.status(200).json({
         status:"success",
         message:"destination proof success"
@@ -9,7 +9,7 @@ const proofBook = (req,res) =>{
 }
 
 /* funcion de registrar libro 🖋 */
-const registerBook = (req,res) =>{
+const registerBook = async (req,res) =>{
     //recoge los parametros que llegan por la petición
     let params = req.body;
 
@@ -26,7 +26,7 @@ const registerBook = (req,res) =>{
     //validación de datos
     validateBook(params)
 
-    const  savedBook = new Book(params);
+    const  savedBook =  await new Book(params);
 
     savedBook.save()
         .then((saved__book)=>{

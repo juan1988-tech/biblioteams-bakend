@@ -1,13 +1,41 @@
-import connection  from './database/connection.mjs';
+//import connection  from './database/connection.mjs';
 import express from 'express';
 import cors  from 'cors';
 import bookRouter from './routes/book.mjs';
 import userRouter from './routes/user.mjs';
-
+import mongoose from 'mongoose';
+import connection from './database/connection.mjs';
 /*  💡 establecer la conexión al servidor ✨ */
-connection();
+//connection();
 
-/*  crear el servidor en node con la base de datos */ 
+import { MongoClient, ServerApiVersion } from 'mongodb';
+const uri = "mongodb+srv://jfrancoh5:Cell1032421402@biblioteams-backend.iger6.mongodb.net/?retryWrites=true&w=majority&appName=biblioteams-backend";
+
+
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
+
+async function run() {
+  try {
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+    await mongoose.connect('mongodb+srv://jfrancoh5:Cell1032421402@biblioteams-backend.iger6.mongodb.net/?retryWrites=true&w=majority&appName=biblioteams-backend');
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+run().catch(console.dir);
+
 const app = express();
 
 /*configura el cors*/ 
@@ -15,7 +43,6 @@ app.use(cors())
 
 /*crea la conexión http */
 const port = 3002;
-
 
 app.use(express.json());
 app.use(express.urlencoded({
