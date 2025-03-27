@@ -68,4 +68,40 @@ const listBook = async (req,res) =>{
     })
 }
 
-export { proofBook,registerBook,listBook } ;
+const updateBook = async (req,res) =>{
+    let bookId = req.params.id;
+    
+     //recoge los parametros que llegan por la petición
+     let params = req.body;
+
+     //comprobar los datos de la peticion
+     if(!params.name || !params.author ||!params.publisher ||!params.year ||!params.p1 ||!params.p2 ||!params.p3){
+         console.log('faltan datos por rellenar')
+         return res.status(400).json({
+             status:"failed",
+             message:"faltan datos por rellenar"
+         })
+     }
+ 
+     //validación de datos para el libro 📕
+     validateBook(params);
+
+    Book
+        .findOneAndUpdate({_id: bookId},params)
+        .then((updatedBook)=>{
+            if(!updatedBook){
+                return res.status(500).json({
+                    status:"error",
+                    message:"error al actualizar el libro"
+                })
+            }
+
+            return res.status(200).json({
+                status:"success",
+                message:"Libro actualizado",
+                updatedBook: updatedBook 
+            })
+        })   
+}
+
+export { proofBook,registerBook,listBook,updateBook } ;

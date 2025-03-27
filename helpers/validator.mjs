@@ -14,24 +14,17 @@ const validateString = (parameter,field) =>{
 }
 
 /*validar campos de número*/
-const validateNumber = (parameter,field) =>{
-    if(parameter){
-        let number = !validator.isEmpty(parameter) &&
-        validator.isNumeric(parameter);
-
-        if(!number){
-            throw new Error(`validacion no superda ${field}, debes escribir un numero`)
-        }
-    }
-}
 
 function validateBook(params){
     validateString(params.name,'nombre');
     validateString(params.author,'autor');
     validateString(params.topic_1,'Tema 1');
-    validateNumber(params.dewey_1,'Dewey no. 1'); 
+    validateString(params.dewey_1,'Dewey no. 1'); 
     validateString(params.topic_2,'Tema 2');
-    validateNumber(params.dewey_2,'Dewey no. 2');
+    validateString(params.dewey_2,'Dewey no. 2');
+    validateString(params.p1,'Parrafo no. 1');
+    validateString(params.p2,'Parrafo no. 2');
+    validateString(params.p3,'Parrafo no. 3');
 }   
 
 export default validateBook;
