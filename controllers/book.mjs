@@ -68,6 +68,27 @@ const listBook = async (req,res) =>{
     })
 }
 
+const oneBook = (req,res) =>{
+    //obtener un libro por su url relativa
+    const urlBook = req.params.link;
+
+    Book.findOne({link: urlBook})
+    .then((oneBook)=>{
+        if(!oneBook){
+            return res.status(400).json({
+                status:"failed",
+                message:"lo sentimos, no hemos encontrado tu libro"
+            })
+        }else{
+            return res.status(200).json({
+                status:"success",
+                book: oneBook
+            })
+        }
+    })
+}
+
+
 const updateBook = async (req,res) =>{
     let bookId = req.params.id;
     
@@ -75,7 +96,7 @@ const updateBook = async (req,res) =>{
      let params = req.body;
 
      //comprobar los datos de la peticion
-     if(!params.name || !params.author ||!params.publisher ||!params.year ||!params.p1 ||!params.p2 ||!params.p3){
+     if(!params.name || !params.author ||!params.publisher ||!params.year ||!params.description){
          console.log('faltan datos por rellenar')
          return res.status(400).json({
              status:"failed",
@@ -104,4 +125,4 @@ const updateBook = async (req,res) =>{
         })   
 }
 
-export { proofBook,registerBook,listBook,updateBook } ;
+export { proofBook,registerBook,listBook,updateBook,oneBook } ;

@@ -36,15 +36,9 @@ const bookSchema = Schema({
     available:{
         type:Boolean
     },
-    p1:{
-        type:String,  
+    description:{
+        type:String
     },
-    p2:{
-        type:String,
-    },
-    p3:{
-        type:String,
-    },    
     link:{
         type:String
     }
